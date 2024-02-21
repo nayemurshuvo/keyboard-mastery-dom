@@ -36,6 +36,7 @@ function getElementTextById(elementId) {
   return text;
 }
 
+// Alphabet Genterator
 function getARandomAlphabet() {
   const alphabetString = "abcdefghijklmnopqrstuvwxyz";
   const alphabets = alphabetString.split("");

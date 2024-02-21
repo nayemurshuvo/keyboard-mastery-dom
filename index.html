@@ -54,7 +54,7 @@
             </div>
             <div class="flex justify-center items-center py-14">
               <p
-                id="current-alphabet"
+                id="random-alphabet"
                 class="text-black text-9xl font-bold uppercase"
               >
                 Y
@@ -121,20 +121,21 @@
       </section>
 
       <!-- final Score start -->
-      <section
-        id="final-score"
-        class="flex justify-center items-center min-h-screen hidden"
-      >
-        <div
-          class="text-black text-center space-y-6 bg-[#FFFFFF33] px-8 py-4 rounded-lg"
-        >
-          <h4 class="text-3xl">Game Over !</h4>
-          <h1 class="text-8xl">
-            <span class="font-extrabold">Score:</span>
-            <span id="last-score">14</span>
-          </h1>
-          <button onclick="play()" class="btn bg-amber-700">Play Again</button>
-          <p>Practice will make you a Pro</p>
+      <section id="final-score" class="hidden">
+        <div class="flex justify-center items-center min-h-screen">
+          <div
+            class="text-black text-center space-y-6 bg-[#FFFFFF33] px-8 py-4 rounded-lg"
+          >
+            <h4 class="text-3xl">Game Over !</h4>
+            <h1 class="text-8xl">
+              <span class="font-extrabold">Score:</span>
+              <span id="last-score">14</span>
+            </h1>
+            <button onclick="play()" class="btn bg-amber-700">
+              Play Again
+            </button>
+            <p>Practice will make you a Pro</p>
+          </div>
         </div>
       </section>
     </main>
