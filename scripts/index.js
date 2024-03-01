@@ -1,11 +1,23 @@
 // Enter key pressed count
 let count = 0;
+// landing page & score page bug fixing(before start playing kew was listenging)
+let isGamePlayOn = false;
+
+// adding audio
+const audio = new Audio();
+
+// Artboard BG dynamically change
+const artBoard = document.getElementById("artBoard");
+// modal
+const modalBox = document.getElementById("modal-box");
 
 // callback function when pressed a key (step 4)
 function handleKeyboardKeyUpEvent(event) {
+  if (isGamePlayOn == false) return;
   const playerPressed = event.key;
-  console.log("player pressed", playerPressed);
+  // console.log("player pressed", playerPressed);
 
+  /** 
   // Start the game if pressed Enter
   if (playerPressed === "Enter") {
     play();
@@ -15,9 +27,10 @@ function handleKeyboardKeyUpEvent(event) {
       gameOver();
     }
   }
+*/
 
   // stop the game if pressed 'Esc'
-  else if (playerPressed === "Escape") {
+  if (playerPressed === "Escape") {
     gameOver();
   }
 
@@ -30,6 +43,10 @@ function handleKeyboardKeyUpEvent(event) {
   if (playerPressed === expectedAlphabet) {
     // console.log("you got a point!");
 
+    // Add correct audio source
+    audio.src = "../audio/correct.mp3";
+    audio.play();
+
     const currentScore = getTextElementValueById("current-score");
     const updatedScore = currentScore + 1;
     setTextElementValueById("current-score", updatedScore);
@@ -38,8 +55,17 @@ function handleKeyboardKeyUpEvent(event) {
     removeBackgroundColorById(expectedAlphabet);
     continueGame();
   } else {
+    // Add correct audio source
+    audio.src = "../audio/wrong.mp3";
+    audio.play();
+
     const currentLife = getTextElementValueById("current-life");
     const updatedLife = currentLife - 1;
+
+    // percentage wise dynamic color
+    const updatedLifePercentage = (updatedLife / 5) * 100;
+    artBoard.style.background = `linear-gradient(#FFFFFFB3 ${updatedLifePercentage}%,red)`;
+
     setTextElementValueById("current-life", updatedLife);
 
     if (updatedLife === 0) {
@@ -75,6 +101,7 @@ function play() {
   setTextElementValueById("current-life", 5);
   setTextElementValueById("current-score", 0);
 
+  isGamePlayOn = true;
   continueGame();
 }
 
@@ -90,4 +117,18 @@ function gameOver() {
   const currentAlphabet = getElementTextById("random-alphabet");
   // console.log(currentAlphabet);
   removeBackgroundColorById(currentAlphabet);
+  isGamePlayOn = false;
+  artBoard.style.background = "linear-gradient(#FFFFFFB3 100%,red)";
 }
+
+function modelOpen(event) {
+  if (event.clientY < 10) {
+    modalBox.style.display = "flex";
+  }
+}
+
+function modalClose() {
+  modalBox.style.display = "none";
+}
+
+document.body.onmousemove = modelOpen;
